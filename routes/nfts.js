@@ -58,7 +58,7 @@ router.get('/:tokenId', async(req, res) => {
 router.post("/upload", uploadNFT.single("file"), async (req, res) => {
     console.log(req)
     if (req.file === undefined) return res.send('you must select a file')
-    const imgUrl = `http://localhost:8000/nft/ipfs/${req.file.filename}`
+    const imgUrl = `http://35.158.6.155:8000/nft/ipfs/${req.file.filename}`
     try{
         const file = await nfts.files.findOne({filename: req.file.filename})
         const readStream = nfts.createReadStream(file.filename)
@@ -75,7 +75,7 @@ router.post("/upload", uploadNFT.single("file"), async (req, res) => {
 
 router.post('/uploadPdf', uploadNFT.single("file"), async(req,res) => {
     if (req.file === undefined) return res.send('you must select a file')
-    const pdfUrl = `http://localhost:8000/nft/ipfs/${req.file.filename}`
+    const pdfUrl = `http://35.158.6.155:8000/nft/ipfs/${req.file.filename}`
     try{
         const file = await nfts.files.findOne({filename: req.file.filename})
         const readStream = nfts.createReadStream(file.filename)

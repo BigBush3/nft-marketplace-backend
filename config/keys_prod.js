@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI: process.env.MONGO_URI,
-    secretOrKey: process.env.SECRET_OR_KEY
+    mongoURI: 'mongodb+srv://admin:admin@nft-marketplace.stbi0.mongodb.net/nft-marketplace?retryWrites=true&w=majority',
+    secretOrKey: 'SECRET'
 }
