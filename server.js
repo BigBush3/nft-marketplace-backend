@@ -60,7 +60,7 @@ app.delete('/banner/:id', async (req, res) => {
 
 app.post('/banner/upload',uploadBanner.single("file"), async (req,res) => {
     if (req.file === undefined) return res.send('you must select a file')
-    const imgUrl = `http://localhost:8000/banner/${req.file.filename}`
+    const imgUrl = `https://desolate-inlet-76011.herokuapp.com/banner/${req.file.filename}`
     return res.send({img: imgUrl})
 })
 app.get('/banner/:filename', async (req, res) => {
