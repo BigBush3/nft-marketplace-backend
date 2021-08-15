@@ -31,7 +31,7 @@ router.post('/create', async (req, res) => {
         owner: req.body.userId,
         img: req.body.img,
         pdf: req.body.pdf,
-        verified: true
+        verified: req.body.verified
     })
     console.log(result)
     if (result) {
