@@ -130,16 +130,16 @@ app.get('/user/:id', async (req, res) => {
 })
 
 app.post('/admin/login', async (req, res) => {
-    console.log(req.body)
-    console.log(Admins.find())
+    console.log(req.headers, 'hi')
     var auth = await Admins.findOne({"password": req.body.password, "email": req.body.email})
     if (auth){
-        return res.send(auth)
+        return res.send({result: auth, token: {access_token: 'wowowow'}})
     }
     return res.send({status: 'bad'})
 })
 
 app.post('/user/login', async (req, res) => {
+    
     var auth = await Users.findOne({"wallet": req.body.wallet}).exec()
     if (auth){
         res.send({name: auth.name, email: auth.email, id: auth._id, imgUrl: auth.imgUrl})
@@ -149,6 +149,13 @@ app.post('/user/login', async (req, res) => {
 
 /*     const query = Users.findOne({wallet: req.body.wallet}) */
     
+})
+
+app.post('/auth/me', async(req, res) => {
+    if (req.headers.authorization){
+        console.log('hello')
+        res.send({user: true})
+    }
 })
 
 app.post('/user/register', async (req, res) => {
