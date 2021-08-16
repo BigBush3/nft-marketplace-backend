@@ -130,6 +130,8 @@ app.get('/user/:id', async (req, res) => {
 })
 
 app.post('/admin/login', async (req, res) => {
+    console.log(req.body)
+    console.log(Admins.find())
     var auth = await Admins.findOne({"password": req.body.password, "email": req.body.email})
     if (auth){
         return res.send(auth)
