@@ -129,6 +129,14 @@ app.get('/user/:id', async (req, res) => {
 
 })
 
+app.post('/admin/login', async (req, res) => {
+    var auth = await Admins.findOne({"password": req.body.password, "email": req.body.email})
+    if (auth){
+        return res.send(auth)
+    }
+    return res.send({status: 'bad'})
+})
+
 app.post('/user/login', async (req, res) => {
     var auth = await Users.findOne({"wallet": req.body.wallet}).exec()
     if (auth){

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const nftSchema = require('./../schemas/nftSchema')
+const nftSchema = require('./../schemas/adminSchema')
 
 
 const Admins = mongoose.model('Admins', nftSchema)
