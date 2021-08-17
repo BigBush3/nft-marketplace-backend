@@ -23,7 +23,22 @@ const pinata = pinataSDK('7a0e01d7b7ea27cdd9f9', 'd02fc23c05b60f766cb3b884149c22
 
 
 router.post('/create', async (req, res) => {
-    const result = await Tokens.create({
+    if (req.body.wallet){
+        const user = await Users.findOne({"wallet": req.body.wallet})
+        const result = await Tokens.create({
+            title: req.body.title,
+            collect: req.body.collect,
+            description: req.body.description,
+            royalty: req.body.royalty,
+            owner: user._id,
+            img: req.body.img,
+            pdf: req.body.pdf,
+            verified: req.body.verified
+        })
+        const query = await Users.findOneAndUpdate({_id: user._id}, {$push: {nfts: result._id}})
+        return res.status(200).send({result, query})
+    } else {
+            const resClient = await Tokens.create({
         title: req.body.title,
         collect: req.body.collect,
         description: req.body.description,
@@ -33,12 +48,9 @@ router.post('/create', async (req, res) => {
         pdf: req.body.pdf,
         verified: req.body.verified
     })
-    console.log(result)
-    if (result) {
-        const query = await Users.findOneAndUpdate({_id: req.body.userId}, {$push: {nfts: result._id}})
-        return res.status(200).send({result, query})
+    const queue = await Users.findOneAndUpdate({_id: req.body.userId}, {$push: {nfts: resClient._id}})
+        return res.status(200).send({resClient, queue})
     }
-    return res.send(result)
     
 })
 

@@ -138,6 +138,14 @@ app.post('/admin/login', async (req, res) => {
     return res.send({status: 'bad'})
 })
 
+app.post('/admin/register', async (req, res) => {
+    const result = await Admins.create({"password": req.body.password, "email": req.body.email, "name": "req.body.name"})
+    if (result){
+        return res.send(result)
+    }
+    res.send(result)
+})
+
 app.post('/user/login', async (req, res) => {
     
     var auth = await Users.findOne({"wallet": req.body.wallet}).exec()
@@ -178,6 +186,11 @@ app.post('/user/register', async (req, res) => {
             res.send(newUser)
         }
         
+})
+
+app.delete('/reports', async (req, res) => {
+    const result = await Reports.findOneAndRemove({"description": req.body.description, "title": req.body.title})
+    return res.send({status: 'well-done'})
 })
 
 app.get('/file/:filename', async(req,res)=>{
