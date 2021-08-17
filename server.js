@@ -169,8 +169,11 @@ app.get('/admins', async (req, res) => {
     return res.send(result)
 })
 
-app.post('/whitelist', async (req, res) => {
-    const result = await Users.findOneAndUpdate({"wallet": req.body.wallet}, {"verified": true})
+app.post('/api/whitelist', async (req, res) => {
+    console.log(req.body)
+    const result = await Users.findOneAndUpdate({wallet: req.body.wallet}, {verified: true})
+    console.log(result)
+    return res.send(result)
 })
 
 app.get('/whitelist', async (req, res) => {
@@ -191,7 +194,7 @@ app.post('/auth/me', async(req, res) => {
 })
 
 app.post('/user/register', async (req, res) => {
-        let doc = await Users.findOneAndUpdate({wallet: req.body.wallet}, {
+        let doc = await Users.findOneAndUpdate({wallet: req.body.wallet.toLowerCase()}, {
             name: req.body.name,
             email: req.body.email,
             imgUrl: req.body.imgUrl, 
