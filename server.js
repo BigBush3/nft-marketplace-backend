@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/whitelist', async (req, res) => {
-    const result = await Whitelist.create({'wallet': req.body.wallet})
+    const result = await Users.findOneAndUpdate({'wallet': req.body.wallet}, {"verified": true})
     res.send(result)
 })
 
