@@ -155,7 +155,7 @@ app.post('/user/login', async (req, res) => {
     
     var auth = await Users.findOne({"wallet": req.body.wallet}).exec()
     if (auth){
-        res.send({name: auth.name, email: auth.email, id: auth._id, imgUrl: auth.imgUrl})
+        res.send({name: auth.name, email: auth.email, id: auth._id, imgUrl: auth.imgUrl, verified: auth.verified})
     } else {
         res.send({data: 'not found'})
     }
