@@ -170,9 +170,7 @@ app.get('/admins', async (req, res) => {
 })
 
 app.post('/api/whitelist', async (req, res) => {
-    console.log(req.body)
     const result = await Users.findOneAndUpdate({wallet: req.body.wallet}, {verified: true})
-    console.log(result)
     return res.send(result)
 })
 
