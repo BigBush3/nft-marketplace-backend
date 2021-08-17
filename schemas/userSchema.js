@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     nfts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tokens' }],
     email: String,
     wallet: String,
+    verified: Boolean,
     imgUrl: String,
     creationDate: {type: Date, default: Date.now()}
 })
