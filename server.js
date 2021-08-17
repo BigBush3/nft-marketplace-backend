@@ -146,6 +146,11 @@ app.post('/admin/register', async (req, res) => {
     res.send(result)
 })
 
+app.delete('/admin/:id', async (req, res) => {
+    const result = await Admins.findOneAndRemove({"_id": req.query.id})
+    return res.send(result)
+})
+
 app.post('/user/login', async (req, res) => {
     
     var auth = await Users.findOne({"wallet": req.body.wallet}).exec()
@@ -157,6 +162,25 @@ app.post('/user/login', async (req, res) => {
 
 /*     const query = Users.findOne({wallet: req.body.wallet}) */
     
+})
+
+app.get('/admins', async (req, res) => {
+    const result = await Admins.find()
+    return res.send(result)
+})
+
+app.post('/whitelist', async (req, res) => {
+    const result = await Users.findOneAndUpdate({"wallet": req.body.wallet}, {"verified": true})
+})
+
+app.get('/whitelist', async (req, res) => {
+    const result = await Users.find({"verified": true})
+    return res.send(result)
+})
+
+app.delete('/whitelist/:id', async (req, res) => {
+    const reslut = await Users.findOneAndUpdate({"_id": req.params.id}, {"verified": false})
+    return res.send(result)
 })
 
 app.post('/auth/me', async(req, res) => {
