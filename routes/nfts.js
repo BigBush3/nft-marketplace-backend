@@ -33,7 +33,11 @@ router.post('/create', async (req, res) => {
             owner: user._id,
             img: req.body.img,
             pdf: req.body.pdf,
-            verified: req.body.verified
+            verified: req.body.verified,
+            price: req.body.price,
+            location: req.body.location,
+            type: req.body.type,
+            tokenId: req.body.tokenId
         })
         const query = await Users.findOneAndUpdate({_id: user._id}, {$push: {nfts: result._id}})
         return res.status(200).send({result, query})
@@ -46,7 +50,11 @@ router.post('/create', async (req, res) => {
         owner: req.body.userId,
         img: req.body.img,
         pdf: req.body.pdf,
-        verified: req.body.verified
+        verified: req.body.verified,
+        price: req.body.price,
+        location: req.body.location,
+        type: req.body.type,
+        tokenId: req.body.tokenId
     })
     const queue = await Users.findOneAndUpdate({_id: req.body.userId}, {$push: {nfts: resClient._id}})
         return res.status(200).send({resClient, queue})
