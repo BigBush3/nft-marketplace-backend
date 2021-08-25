@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     wallet: String,
     verified: Boolean,
     imgUrl: String,
+    headerUrl: String,
     creationDate: {type: Date, default: Date.now()}
 })
 

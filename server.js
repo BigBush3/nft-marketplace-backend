@@ -196,6 +196,7 @@ app.post('/user/register', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             imgUrl: req.body.imgUrl, 
+            headerUrl: req.body.headerUrl
         }, {
             useFindAndModify: true
         })
@@ -206,7 +207,8 @@ app.post('/user/register', async (req, res) => {
                 name: req.body.name,
                 email: req.body.email,
                 imgUrl: req.body.imgUrl,
-                wallet: req.body.wallet 
+                wallet: req.body.wallet,
+                headerUrl: req.body.headerUrl
             })
             res.send(newUser)
         }
