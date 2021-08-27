@@ -75,6 +75,16 @@ router.get('/:tokenId', async(req, res) => {
     }
 })
 
+router.post("/likes", async (req, res) => {
+    let result
+    if (req.body.status){
+        result = await Tokens.findOneAndUpdate({"_id": req.params.product}, {$inc: {likes: 1}})
+    } else {
+        result = await Tokens.findOneAndUpdate({"_id": req.params.product}, {$inc: {likes: -1}})
+    }
+    return res.send(result)
+})
+
 router.post("/upload", uploadNFT.single("file"), async (req, res) => {
     console.log(req)
     if (req.file === undefined) return res.send('you must select a file')

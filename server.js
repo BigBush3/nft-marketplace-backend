@@ -92,6 +92,11 @@ app.get('/banner', async(req, res) => {
     res.send(result)
 })
 
+app.post('/views', async(req, res) => {
+    const result = await Users.findOneAndUpdate({"_id": req.body.product}, {$inc: {views: 1}})
+    return res.send(result)
+} )
+
 app.get('/reports', async(req, res) => {
     const result = await Reports.find().populate('sender')
     console.log(result)
@@ -108,6 +113,8 @@ app.post('/report', async(req, res) => {
     }
     return res.send({data: 'failed'})
 })
+
+
 
 app.get('/users', async (req, res) => {
     const result = await Users.find()
