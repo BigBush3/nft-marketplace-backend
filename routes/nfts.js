@@ -61,6 +61,10 @@ router.post('/create', async (req, res) => {
     }
     
 })
+router.post('/views', async(req, res) => {
+    const result = await Tokens.findOneAndUpdate({"_id": req.body.product}, {$inc: {views: 1}})
+    return res.send(result)
+} )
 
 router.get('/', async(req, res) => {
     const result = await Tokens.find().populate('owner')
