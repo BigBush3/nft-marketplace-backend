@@ -191,6 +191,16 @@ app.post('/auth/me', async(req, res) => {
     }
 })
 
+app.post('/user/favorite', async (req, res) => {
+    let result
+    if (req.body.status){
+        result = await Users.findOneAndUpdate({_id: req.body.id}, {$push: {favouriteNfts: req.body.product}})
+    } else {
+        result = await Users.findOneAndUpdate({_id: req.body.id}, {$pull: {favouriteNfts: req.body.product}})
+    }
+    return res.send(result)
+})
+
 app.post('/user/register', async (req, res) => {
         let doc = await Users.findOneAndUpdate({wallet: req.body.wallet.toLowerCase()}, {
             name: req.body.name,

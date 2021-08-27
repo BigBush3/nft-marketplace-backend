@@ -15,7 +15,6 @@ const nftSchema = new mongoose.Schema({
     type: String,
     price: String,
     views: {type: Number, default: 0},
-    favoriteMe: {type: Boolean, default: false},
     likes: {type: Number, default: 0},
     tokenId: Number,
 

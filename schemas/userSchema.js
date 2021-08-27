@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     name: String,
     nfts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tokens' }],
+    favouriteNfts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tokens' }],
     email: String,
     wallet: String,
     verified: Boolean,
