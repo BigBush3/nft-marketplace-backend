@@ -125,7 +125,7 @@ app.delete('/user/:id', async(req, res)=>{
 
 app.get('/user/:id', async (req, res) => {
     try{
-            const result = await Users.findOne({"_id": req.params.id}).populate('nfts')
+            const result = await Users.findOne({"_id": req.params.id}).populate('nfts').populate('favouriteNfts')
     return res.send(result)
     } catch(err){
         console.log(err.message)
