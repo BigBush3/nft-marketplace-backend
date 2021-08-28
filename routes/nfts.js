@@ -82,10 +82,11 @@ router.get('/:tokenId', async(req, res) => {
 router.post("/likes", async (req, res) => {
     let result
     if (req.body.status){
-        result = await Tokens.findOneAndUpdate({_id: req.params.product}, {$inc: {likes: 1}})
+        result = await Tokens.findOneAndUpdate({"_id": req.body.product}, {$inc: {likes: 1}})
     } else {
-        result = await Tokens.findOneAndUpdate({_id: req.params.product}, {$inc: {likes: -1}})
+        result = await Tokens.findOneAndUpdate({"_id": req.body.product}, {$inc: {likes: -1}})
     }
+    console.log(result)
     return res.send(result)
 })
 
