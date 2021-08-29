@@ -125,7 +125,8 @@ app.delete('/user/:id', async(req, res)=>{
 
 app.get('/user/:id', async (req, res) => {
     try{
-            const result = await Users.findOne({"_id": req.params.id}).populate('nfts').populate('favouriteNfts')
+            const result = await Users.findOne({"_id": req.params.id}).populate('nfts').populate('favouriteNfts').populate('followers').populate('followings')
+            console.log(result)
     return res.send(result)
     } catch(err){
         console.log(err.message)
@@ -193,6 +194,17 @@ app.post('/auth/me', async(req, res) => {
         console.log('hello')
         res.send({user: true})
     }
+})
+
+app.post("/user/follow", async(req, res) => {
+    const result = await Users.findOneAndUpdate({_id: req.body.id}, {$push: {followings: req.body.user.cabinetId}})
+    const res2 = await Users.findOneAndUpdate({_id: req.body.user.cabinetId}, {$push: {followers: req.body.id}})
+    return result
+})
+app.post("/user/unfollow", async(req, res) => {
+    const result = await Users.findOneAndUpdate({_id: req.body.id}, {$pull: {followings: req.body.user.cabinetId}})
+    const res2 = await Users.findOneAndUpdate({_id: req.body.user.cabinetId}, {$pull: {followers: req.body.id}})
+    return result
 })
 
 app.post('/user/favorite', async (req, res) => {
