@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { any } = require('../middleware/uploadBanner')
 
 const nftSchema = new mongoose.Schema({
     img: String,
@@ -17,6 +18,10 @@ const nftSchema = new mongoose.Schema({
     views: {type: Number, default: 0},
     likes: {type: Number, default: 0},
     tokenId: Number,
+    orderIndex: Number,
+    currentBid: Number,
+    startDate: String,
+    endDate: String,
 
 })
 

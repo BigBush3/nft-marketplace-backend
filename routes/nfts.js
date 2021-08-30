@@ -37,7 +37,11 @@ router.post('/create', async (req, res) => {
             price: req.body.price,
             location: req.body.location,
             type: req.body.type,
-            tokenId: req.body.tokenId
+            tokenId: req.body.tokenId,
+            orderIndex: req.body.orderIndex,
+            currentBid: req.body.currentBid,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate
         })
         const query = await Users.findOneAndUpdate({_id: user._id}, {$push: {nfts: result._id}})
         return res.status(200).send({result, query})
@@ -54,7 +58,11 @@ router.post('/create', async (req, res) => {
         price: req.body.price,
         location: req.body.location,
         type: req.body.type,
-        tokenId: req.body.tokenId
+        tokenId: req.body.tokenId,
+        orderIndex: req.body.orderIndex,
+        currentBid: req.body.currentBid,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate
     })
     const queue = await Users.findOneAndUpdate({_id: req.body.userId}, {$push: {nfts: resClient._id}})
         return res.status(200).send({resClient, queue})
