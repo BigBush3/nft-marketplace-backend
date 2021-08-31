@@ -93,6 +93,11 @@ router.post('/buy', async(req, res) => {
     return res.send({status: success})
 })
 
+router.post('/bid', async(req, res) => {
+    const result = await Tokens.findOneAndUpdate({"_id": req.body.id}, {$push: {bids: {userId: req.body.userId, bid: req.body.price, bidIndex: req.body.bidIndex}}, currentBid: bid})
+    return res.send(result)
+})
+
 router.post("/likes", async (req, res) => {
     let result
     if (req.body.status){

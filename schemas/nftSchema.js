@@ -13,6 +13,13 @@ const nftSchema = new mongoose.Schema({
     ownerWallet: String,
     creationDate: {type: Date, default: Date.now()},
     location: {type: String, default: "marketplace"},
+    bids: [
+        {
+            userId: String,
+            bidIndex: Number,
+            bid: Number
+        }
+    ],
     type: String,
     price: String,
     views: {type: Number, default: 0},
