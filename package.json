@@ -21,6 +21,8 @@
     "@pinata/sdk": "^1.1.23",
     "config": "^3.3.6",
     "cors": "^2.8.5",
+    "dgram": "^1.0.1",
+    "dns": "^0.2.2",
     "express": "^4.17.1",
     "gridfs-stream": "^1.1.1",
     "helmet": "^4.6.0",

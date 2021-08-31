@@ -86,6 +86,12 @@ router.get('/:tokenId', async(req, res) => {
         return res.send(result)
     }
 })
+router.post('/buy', async(req, res) => {
+    const result = await Tokens.findOneAndUpdate({"_id": req.body.tokenId}, {owner: req.body.buyerId, location: 'collection'})
+    const user = await Users.findOneAndUpdate({"_id": req.body.ownerId}, {$pull: {nfts: req.body.tokenId}})
+    const user2 = await Users.findOneAndUpdate({"_id": req.body.buyerId}, {$push: {nfts: req.body.tokenId}})
+    return res.send({status: success})
+})
 
 router.post("/likes", async (req, res) => {
     let result
